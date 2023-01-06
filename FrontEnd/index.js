@@ -30,10 +30,11 @@ async function requestWork(){
 requestWork()
 
 //Add fetchedWork to the gallery container with JS
+const portfolioSection = document.getElementById("portfolio")
+const gallery = document.querySelector("#portfolio .gallery")
 
 function renderImg(){
     for(let i = 0; i < fetchedWork.length; i++){
-        const gallery = document.querySelector("#portfolio .gallery")
         const figureEl = document.createElement("figure")
         gallery.appendChild(figureEl)
         const imgEl = document.createElement("img")
@@ -45,3 +46,35 @@ function renderImg(){
         figureEl.appendChild(imgCaption)
     }
 }
+
+//Create filter container & buttons
+//Create container
+let filterBtnContainer = document.createElement("div")
+filterBtnContainer.setAttribute("id", "filter-btn-container")
+portfolioSection.insertBefore(filterBtnContainer, portfolioSection.children[1])
+
+//Create button
+filterBtnContainer = document.getElementById("filter-btn-container")
+
+const selectAll = document.createElement("button")
+selectAll.setAttribute("id", "select-all")
+selectAll.innerText = `Tous`
+filterBtnContainer.appendChild(selectAll)
+
+const selectObject = document.createElement("button")
+selectObject.setAttribute("id", "select-object")
+selectObject.innerText = `Objets`
+filterBtnContainer.appendChild(selectObject)
+
+const selectAppartment = document.createElement("button")
+selectAppartment.setAttribute("id", "select-appartment")
+selectAppartment.innerText = `Appartements`
+filterBtnContainer.appendChild(selectAppartment)
+
+const selectHotelRestaurant = document.createElement("button")
+selectHotelRestaurant.setAttribute("id", "select-hotel-restaurant")
+selectHotelRestaurant.innerText = `Hôtels & restaurants`
+filterBtnContainer.appendChild(selectHotelRestaurant)
+
+//addEventListener to button
+//Use .filter() method
