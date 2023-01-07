@@ -108,11 +108,6 @@ li a:hover{
 	color: #B1663C;
 }
 
-.nav-login-link{
-	color: #000;
-	font-weight: bold;
-}
-
 #introduction {
 	display: flex;
 	align-items: center;
@@ -163,7 +158,7 @@ li a:hover{
 	font-size: 16px;
 }
 
-#select-all{
+.filter-btn--reverse{
 	background-color: #1D6154;
 	color: #fff;
 }
@@ -229,3 +224,50 @@ footer nav ul {
 	margin: 2em
 }
 
+
+/*STYLE FOR LOGIN PAGE*/
+.login__body{
+	display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+.login__nav--link{
+	color: #000;
+	font-weight: bold;
+}
+
+.login__main{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: -150px;
+}
+
+.login__form{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	margin-top: 35px;
+}
+
+.login-form__label{
+	color: #3D3D3D;
+	margin-bottom: 7px;
+}
+
+.login-form__input{
+	width: 379px;
+	height: 51px;
+	background-color: #FFFFFF;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	border-color: transparent;
+	margin-bottom: 30px;
+}
+
+.login__forget-password{
+	color: #3D3D3D;
+}

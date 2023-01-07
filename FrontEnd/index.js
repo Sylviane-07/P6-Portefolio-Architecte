@@ -58,7 +58,7 @@ filterBtnContainer = document.getElementById("filter-btn-container")
 
 const selectAll = document.createElement("button")
 selectAll.setAttribute("id", "select-all")
-selectAll.classList.add("filter-btn")
+selectAll.classList.add("filter-btn", "filter-btn--reverse")
 selectAll.innerText = `Tous`
 filterBtnContainer.appendChild(selectAll)
 
