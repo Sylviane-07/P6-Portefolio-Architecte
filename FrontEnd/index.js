@@ -23,10 +23,14 @@ let fetchedWork = []
 
 async function requestWork(){
     const response = await fetch('http://localhost:5678/api/works')
-    const data = await response.json()
-    fetchedWork.push(...data)
-    renderImg(fetchedWork)
+    if (response.ok){
+        const data = await response.json()
+        fetchedWork.push(...data)
+        renderImg(fetchedWork)
+    }else{
+        alert("HTTP-Error: " + response.status);
     }
+}
 requestWork()
 
 //Add fetchedWork to the gallery container with JS
