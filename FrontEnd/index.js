@@ -81,4 +81,33 @@ selectHotelRestaurant.innerText = `Hôtels & restaurants`
 filterBtnContainer.appendChild(selectHotelRestaurant)
 
 //addEventListener to button
+selectAll.addEventListener("click", function(){
+    console.log("click All")
+    const filterAll = fetchedWork.filter(function(work){
+        return work.userId === 1
+    })
+    console.log(filterAll)
+})
+selectObject.addEventListener("click", function(){
+    console.log("click Objets")
+    console.log(fetchedWork[0].categoryId )
+    const filterObjects = fetchedWork.filter(function(work){
+        return work.categoryId === 1
+    })
+    console.log(filterObjects)
+})
+selectAppartment.addEventListener("click", function(){
+    console.log("lick Appartements")
+    const filterAppartments = fetchedWork.filter(function(work){
+        return work.categoryId === 2
+    })
+    console.log(filterAppartments)
+})
+selectHotelRestaurant.addEventListener("click", function(){
+    console.log("click Hotel")
+    const filterHotelRestaurant = fetchedWork.filter(function(work){
+        return work.categoryId === 3
+    })
+    console.log(filterHotelRestaurant)
+})
 //Use .filter() method
