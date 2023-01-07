@@ -25,7 +25,7 @@ async function requestWork(){
     const response = await fetch('http://localhost:5678/api/works')
     const data = await response.json()
     fetchedWork.push(...data)
-      renderImg()
+    renderImg(fetchedWork)
     }
 requestWork()
 
@@ -33,16 +33,16 @@ requestWork()
 const portfolioSection = document.getElementById("portfolio")
 const gallery = document.querySelector("#portfolio .gallery")
 
-function renderImg(){
-    for(let i = 0; i < fetchedWork.length; i++){
+function renderImg(work){
+    for(let i = 0; i < work.length; i++){
         const figureEl = document.createElement("figure")
         gallery.appendChild(figureEl)
         const imgEl = document.createElement("img")
-        imgEl.src = fetchedWork[i].imageUrl
-        imgEl.alt = fetchedWork[i].title
+        imgEl.src = work[i].imageUrl
+        imgEl.alt = work[i].title
         figureEl.appendChild(imgEl).setAttribute("crossorigin", "anonymous")
         const imgCaption = document.createElement("figcaption")
-        imgCaption.innerText = fetchedWork[i].title
+        imgCaption.innerText = work[i].title
         figureEl.appendChild(imgCaption)
     }
 }
@@ -83,31 +83,40 @@ filterBtnContainer.appendChild(selectHotelRestaurant)
 //addEventListener to button
 selectAll.addEventListener("click", function(){
     console.log("click All")
-    const filterAll = fetchedWork.filter(function(work){
-        return work.userId === 1
+    const filterAll = fetchedWork.filter(function(fetchedWork){
+        return fetchedWork.userId === 1
     })
     console.log(filterAll)
+    gallery.innerHTML = " "
+    renderImg(filterAll)
 })
+
 selectObject.addEventListener("click", function(){
     console.log("click Objets")
-    console.log(fetchedWork[0].categoryId )
-    const filterObjects = fetchedWork.filter(function(work){
-        return work.categoryId === 1
+    const filterObjects = fetchedWork.filter(function(fetchedWork){
+        return fetchedWork.categoryId === 1
     })
     console.log(filterObjects)
+    gallery.innerHTML = " "
+    renderImg(filterObjects)
 })
+
 selectAppartment.addEventListener("click", function(){
-    console.log("lick Appartements")
-    const filterAppartments = fetchedWork.filter(function(work){
-        return work.categoryId === 2
+    console.log("click Appartements")
+    const filterAppartments = fetchedWork.filter(function(fetchedWork){
+        return fetchedWork.categoryId === 2
     })
     console.log(filterAppartments)
+    gallery.innerHTML = " "
+    renderImg(filterAppartments)
 })
+
 selectHotelRestaurant.addEventListener("click", function(){
     console.log("click Hotel")
-    const filterHotelRestaurant = fetchedWork.filter(function(work){
-        return work.categoryId === 3
+    const filterHotelRestaurant = fetchedWork.filter(function(fetchedWork){
+        return fetchedWork.categoryId === 3
     })
     console.log(filterHotelRestaurant)
+    gallery.innerHTML = " "
+    renderImg(filterHotelRestaurant)
 })
-//Use .filter() method
