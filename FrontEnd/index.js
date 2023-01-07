@@ -80,7 +80,9 @@ selectHotelRestaurant.classList.add("filter-btn")
 selectHotelRestaurant.innerText = `Hôtels & restaurants`
 filterBtnContainer.appendChild(selectHotelRestaurant)
 
-//addEventListener to button
+//AddEventListener to button
+//Add filter
+//Render filter 
 selectAll.addEventListener("click", function(){
     console.log("click All")
     const filterAll = fetchedWork.filter(function(fetchedWork){
