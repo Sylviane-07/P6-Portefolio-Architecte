@@ -33,7 +33,7 @@ function renderImg(work){
 
 //Create filter container & buttons
 //Create container
-let filterBtnContainer = document.createElement("div")
+export let filterBtnContainer = document.createElement("div")
 filterBtnContainer.setAttribute("id", "filter-btn-container")
 portfolioSection.insertBefore(filterBtnContainer, portfolioSection.children[1])
 
@@ -105,12 +105,4 @@ selectHotelRestaurant.addEventListener("click", function(){
     console.log(filterHotelRestaurant)
     gallery.innerHTML = " "
     renderImg(filterHotelRestaurant)
-})
-
-//CLEAR SESSION STORAGE WHEN CLICK ON LOGIN
-document.addEventListener('DOMContentLoaded', () =>{
-    const loginBtn = document.querySelector(".login__nav")
-    loginBtn.addEventListener('click', function(){
-    sessionStorage.removeItem('accessToken')
-    })
 })

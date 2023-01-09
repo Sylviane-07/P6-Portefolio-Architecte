@@ -2,7 +2,10 @@ const submitBtn = document.getElementById("submit-btn")
 const authForm = document.querySelector(".login__form")
 const loginBtn = document.querySelector(".login__nav")
 
-document.addEventListener('DOMContentLoaded', () => {
+
+// CHECK FOR TOKEN TO LOGIN USER
+function login(){
+    document.addEventListener('DOMContentLoaded', () => {
     loginBtn.addEventListener('click', function(){
         sessionStorage.removeItem('accessToken')
     })
@@ -10,22 +13,23 @@ document.addEventListener('DOMContentLoaded', () => {
         //prevent form default behavior
         evt.preventDefault()
         //login to receive token
-        login()
+        userAuth()
         //check token in sessionStorage
-        let getToken = sessionStorage.getItem('accessToken')
+        let getToken = window.sessionStorage.getItem('accessToken')
         if(getToken != null){
-            window.location.href = `./index.html`
+            window.location.href = `./index.html`    
         }
-        console.log("check token")
-        console.log(sessionStorage.getItem('accessToken'))
-        console.log("submit")
     })
 })
 
+}
 
-//Change FORM ACTION URL TO REQUEST API   
+login()
 
-function login(){
+
+//GET USER ID TO REQUEST TOKEN  
+
+function userAuth(){
 
     const form = {
         email: document.querySelector("#email").value,
@@ -45,10 +49,8 @@ function login(){
         if(response.status === 200){
             console.log("response ok")
             let result = response.json
-            console.log(result)
             let userToken = JSON.stringify(result)
-            console.log(userToken)
-            sessionStorage.setItem('accessToken', `${userToken}`)
+            window.sessionStorage.setItem('accessToken', `${userToken}`)
             window.location.href = './index.html'
         } else {
             console.log('error')

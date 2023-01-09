@@ -134,15 +134,18 @@ li a:hover{
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
+	margin-bottom: 60px;
 }
 /*CODE FOR STYLING FILTER BUTTONS*/
+.hide-filters{
+	display: none;
+}
+
 #filter-btn-container{
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
-	margin-top: 50px;
-	margin-bottom: 50px;
 	padding-left: 30px;
 }
 
@@ -164,6 +167,7 @@ li a:hover{
 }
 
 .gallery {
+	margin-top: 60px;
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
