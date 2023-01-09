@@ -271,3 +271,8 @@ footer nav ul {
 .login__forget-password{
 	color: #3D3D3D;
 }
+
+.error-message{
+	color: red;
+	margin-top: 20px;
+}

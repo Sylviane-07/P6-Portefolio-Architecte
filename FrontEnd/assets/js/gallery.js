@@ -1,23 +1,3 @@
-// let fetchedWork = []
-// fetch('http://localhost:5678/api/works')
-//     .then(response => {
-//         if(response.ok){
-//             console.log("SUCCESS")
-//             response.json()
-//                 .then(data => {
-//                     fetchedWork.push(...data)
-//                 })
-//         }else{
-//             console.log(Error)
-//         }
-//     return fetchedWork
-//     })
-
-// console.log(fetchedWork)
-// let work = fetchedWork[0]
-// console.log(work)
-
-
 //Fetch work from API
 let fetchedWork = []
 
@@ -125,4 +105,12 @@ selectHotelRestaurant.addEventListener("click", function(){
     console.log(filterHotelRestaurant)
     gallery.innerHTML = " "
     renderImg(filterHotelRestaurant)
+})
+
+//CLEAR SESSION STORAGE WHEN CLICK ON LOGIN
+document.addEventListener('DOMContentLoaded', () =>{
+    const loginBtn = document.querySelector(".login__nav")
+    loginBtn.addEventListener('click', function(){
+    sessionStorage.removeItem('accessToken')
+    })
 })
