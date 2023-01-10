@@ -1,6 +1,6 @@
 import * as renderGallery from "./gallery.js"
 import * as editMode from "./edit.js"
-import { addEditElements } from "./edit.js"
+import { addEditElements } from "./edit-layout.js"
 
 //CLEAR SESSION STORAGE WHEN CLICK ON LOGOUT
 
