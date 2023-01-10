@@ -62,7 +62,7 @@ function userAuth(){
 }
 const mainEl = document.querySelector("main")
 const error = document.createElement("p")
-error.classList.add("error-message")
+error.classList.add("login__error-message")
 mainEl.insertBefore(error, mainEl.children[1])
 
 function errorMessage(){

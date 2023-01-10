@@ -277,7 +277,7 @@ footer nav ul {
 	color: #3D3D3D;
 }
 
-.error-message{
+.login__error-message{
 	color: red;
 	margin-top: 20px;
 }
@@ -287,7 +287,7 @@ footer nav ul {
 	max-width: 1140px;
 	margin:auto;
 }
-.edit-bar-el{
+.edit__bar{
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -296,12 +296,16 @@ footer nav ul {
 	background-color: #000;
 	color: #fff;
 }
-.publish-modif-btn{
+.edit__publish-btn{
 	background-color: #fff;
 	margin: 5px;
 	padding: 10px 25px;
 	border-radius: 60px;
 	border-color: transparent;
+	cursor: pointer;
+}
+
+.edit__modify-text{
 	cursor: pointer;
 }
 
