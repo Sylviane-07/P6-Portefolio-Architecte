@@ -135,7 +135,6 @@ li a:hover{
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
-	margin-bottom: 60px;
 }
 /*CODE FOR STYLING FILTER BUTTONS*/
 .hide-filters{
@@ -305,16 +304,26 @@ footer nav ul {
 	cursor: pointer;
 }
 
-.edit__modify-text{
+.edit__modify-btn{
 	cursor: pointer;
+	font-size: 14px;
+	font-family: 'Work Sans';
+	background-color: transparent;
+	border: none;
 }
 
-#introduction figure p{
+#introduction figure button{
     margin-top: 15px;
 }
 
-#portfolio p {
-	text-align: center;
-	padding-left: 19.88rem;
-	margin-bottom: -25px;
+.gallery__title-container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.gallery__title-container button{
+	margin-bottom: 1.8rem;
+	margin-left: 15px;
+	
 }

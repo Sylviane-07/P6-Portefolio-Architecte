@@ -19,25 +19,27 @@ export function addEditElements(){
     const modifyText = `${modifyIcon} modifier` 
 
     const introPic = document.querySelector("#introduction figure")
-    const modifyEl1 = document.createElement("p")
-    modifyEl1.classList.add("edit__modify-text")
+    const modifyEl1 = document.createElement("button")
+    modifyEl1.classList.add("edit__modify-btn")
     modifyEl1.innerHTML = modifyText
     introPic.appendChild(modifyEl1)
 
     const introText = document.querySelector("#introduction article")
-    const modifyEl2 = document.createElement("p")
-    modifyEl2.classList.add("edit__modify-text")
+    const modifyEl2 = document.createElement("button")
+    modifyEl2.classList.add("edit__modify-btn")
     modifyEl2.innerHTML = modifyText
     introText.insertBefore(modifyEl2, introText.children[0])
 
-    const galleryTitle = document.querySelector("#portfolio")
+    const gallerySection = document.querySelector("#portfolio")
 
-    const glrTtlContaine = document.createElement("div")
-    glrTtlContaine.classList.add("gallery__title-container")
-    galleryTitle.insertBefore(glrTtlContaine, galleryTitle.children[0])
+    const glrTtlContainer = document.createElement("div")
+    glrTtlContainer.classList.add("gallery__title-container")
+    gallerySection.insertBefore(glrTtlContainer, gallerySection.children[0])
 
-    const modifyEl3 = document.createElement("p")
-    modifyEl3.classList.add("edit__modify-text")
+    const galleryTitle = document.querySelector("#portfolio h2")
+    glrTtlContainer.appendChild(galleryTitle)
+    const modifyEl3 = document.createElement("button")
+    modifyEl3.classList.add("edit__modify-btn")
     modifyEl3.innerHTML = modifyText
-    galleryTitle.insertBefore(modifyEl3, galleryTitle.children[0])
+    glrTtlContainer.appendChild(modifyEl3)
 }
