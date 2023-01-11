@@ -42,25 +42,25 @@ filterBtnContainer = document.getElementById("filter-btn-container")
 
 const selectAll = document.createElement("button")
 selectAll.setAttribute("id", "select-all")
-selectAll.classList.add("filter-btn", "filter-btn--reverse")
+selectAll.classList.add("filter-btn", "filter-btn--green")
 selectAll.innerText = `Tous`
 filterBtnContainer.appendChild(selectAll)
 
 const selectObject = document.createElement("button")
 selectObject.setAttribute("id", "select-object")
-selectObject.classList.add("filter-btn")
+selectObject.classList.add("filter-btn", "filter-btn--white")
 selectObject.innerText = `Objets`
 filterBtnContainer.appendChild(selectObject)
 
 const selectAppartment = document.createElement("button")
 selectAppartment.setAttribute("id", "select-appartment")
-selectAppartment.classList.add("filter-btn")
+selectAppartment.classList.add("filter-btn", "filter-btn--white")
 selectAppartment.innerText = `Appartements`
 filterBtnContainer.appendChild(selectAppartment)
 
 const selectHotelRestaurant = document.createElement("button")
 selectHotelRestaurant.setAttribute("id", "select-hotel-restaurant")
-selectHotelRestaurant.classList.add("filter-btn")
+selectHotelRestaurant.classList.add("filter-btn", "filter-btn--white")
 selectHotelRestaurant.innerText = `Hôtels & restaurants`
 filterBtnContainer.appendChild(selectHotelRestaurant)
 

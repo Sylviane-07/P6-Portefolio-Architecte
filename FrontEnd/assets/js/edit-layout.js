@@ -14,7 +14,7 @@ export function addEditElements(){
     publishModifBtn.textContent = "publier les changements"
     editBarEl.appendChild(publishModifBtn)
 
-    //ADD MODIFY PARAGRAPH * 3
+    //ADD MODIFY BTN * 3
 
     const modifyText = `${modifyIcon} modifier` 
 
@@ -39,7 +39,9 @@ export function addEditElements(){
     const galleryTitle = document.querySelector("#portfolio h2")
     glrTtlContainer.appendChild(galleryTitle)
     const modifyEl3 = document.createElement("button")
-    modifyEl3.classList.add("edit__modify-btn")
+    modifyEl3.classList.add("edit__modify-btn", "modal-trigger")
     modifyEl3.innerHTML = modifyText
     glrTtlContainer.appendChild(modifyEl3)
+    
 }
+

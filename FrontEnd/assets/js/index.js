@@ -1,6 +1,7 @@
 import * as renderGallery from "./gallery.js"
-import * as editMode from "./edit.js"
-import { addEditElements } from "./edit-layout.js"
+import { addEditElements} from "./edit-layout.js"
+import {renderModal} from "./modal.js"
+
 
 //CLEAR SESSION STORAGE WHEN CLICK ON LOGOUT
 
@@ -9,14 +10,16 @@ document.addEventListener('DOMContentLoaded', () =>{
 
     let getToken = window.sessionStorage.getItem('accessToken')
         if(getToken != null){
-           loginBtn.textContent = "logout" 
-           const removeFilters = document.getElementById("filter-btn-container")
-           removeFilters.remove()
-           //ADD EDIT MODE FUNCTION HERE
-           addEditElements()
+            //USER IS LOGGED IN
+            loginBtn.textContent = "logout" 
+            const removeFilters = document.getElementById("filter-btn-container")
+            removeFilters.remove()
+            //ADD EDIT MODE FUNCTION HERE
+            addEditElements()
+            renderModal()
         }
 
     loginBtn.addEventListener('click', function(){
-    window.sessionStorage.removeItem('accessToken')
+        window.sessionStorage.removeItem('accessToken')
     })
 })
