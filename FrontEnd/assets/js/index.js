@@ -1,6 +1,7 @@
-import * as renderGallery from "./gallery.js"
+import * as gallery from "./gallery.js"
 import { addEditElements} from "./edit-layout.js"
 import {renderModal} from "./modal.js"
+import { renderGallery } from "./modal.js"
 
 
 //CLEAR SESSION STORAGE WHEN CLICK ON LOGOUT
