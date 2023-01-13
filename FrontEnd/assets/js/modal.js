@@ -74,6 +74,7 @@ function displayGalleryImg(gallery){
         iconContainer.classList.add("icon-container")
         imgContainer.appendChild(iconContainer)
         const trashIcon = document.createElement("button")
+        trashIcon.setAttribute("type", "button")
         trashIcon.classList.add("trash-icon-btn")
         trashIcon.innerHTML = `<i class="fa-regular fa-trash-can"></i>`
         iconContainer.appendChild(trashIcon)
@@ -98,10 +99,14 @@ function displayGalleryImg(gallery){
 export function deleteWork(){
     const trashBtn = document.querySelectorAll(".trash-icon-btn")
         for (let i = 0; i < trashBtn.length; i += 1){
-            trashBtn[i].addEventListener("click", function(){
-                const galleryTotalImg = document.querySelectorAll(".modal__gallery-img")
-                const imgIndex = galleryTotalImg[i]
-                const id = imgIndex.id
+            trashBtn[i].addEventListener("click", function(e){
+                e.preventDefault()
+                const modalGalleryTotalImg = document.querySelectorAll(".modal__gallery-img")
+                const modalImgIndex = modalGalleryTotalImg[i]
+                console.log(modalGalleryTotalImg[i])
+
+                //GET ID FOR API ROUTE
+                const id = modalImgIndex.id
                 console.log(id)
                 
                 async function requestDeleteWork(){
@@ -115,8 +120,8 @@ export function deleteWork(){
                         }
                     })
                     if (response.ok){
-                        const deleteResponse = await response.json()
-                        console.log(deleteResponse)
+                        const deleteResponse = await response
+                        console.log(deleteResponse.status)
                         
                     }else{
                         alert("HTTP-Error: " + response.status);
@@ -124,6 +129,14 @@ export function deleteWork(){
 
                 }
                 requestDeleteWork()
+
+                //REMOVE DISPLAY FROM DOM WITHOUT RELOAD
+                const modalImgCtnr = document.getElementsByClassName("modal__gallery-img-container")
+                modalImgCtnr[i].remove()
+                //HOMEPAGE GALLERY WORK UPDATE
+                const homepageGalleryImg = document.querySelectorAll(".gallery-img-container")
+                console.log(homepageGalleryImg[i])
+                homepageGalleryImg[i].remove()
             })
         }
 }

@@ -485,3 +485,7 @@ footer nav ul {
 	background-color: transparent;
 	border: none;
 }
+
+.deleted-work{
+	display: none;
+}

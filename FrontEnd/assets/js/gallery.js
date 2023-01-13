@@ -20,8 +20,10 @@ const gallery = document.querySelector("#portfolio .gallery")
 function renderImg(work){
     for(let i = 0; i < work.length; i++){
         const figureEl = document.createElement("figure")
+        figureEl.classList.add("gallery-img-container")
         gallery.appendChild(figureEl)
         const imgEl = document.createElement("img")
+        imgEl.classList.add("gallery-img")
         imgEl.src = work[i].imageUrl
         imgEl.alt = work[i].title
         figureEl.appendChild(imgEl).setAttribute("crossorigin", "anonymous")
