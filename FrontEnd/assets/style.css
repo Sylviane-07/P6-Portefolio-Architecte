@@ -424,25 +424,32 @@ footer nav ul {
 	width: 80px;
 }
 
-.modal__gallery-img-container::before{
-	content: '\f2ed';
+.edit-btn{
+	background-color: transparent;
+	border: none;
+	font-family: 'Work Sans';
+	margin-top: 3px;
+	margin-left: -4px;
+	cursor: pointer;
+}
+
+.trash-icon-btn{
 	color: #FFFFFF;
 	width: 17px;
 	height: 17px;
-	background-color: rgba(0, 0, 0, 1);
-	font: var(--fa-font-regular);
-	font-weight: 400;
+	background-color: rgba(0, 0, 0, 1);	
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	font-size: 9px;
 	border-radius: 2px;
 	position: relative;
-    top: 1.5rem;
+    top: 0.5rem;
     left: 3.6rem;
+	cursor: pointer;
 }
 
-.modal__gallery-img-container:first-child::after{
+.modal__gallery-img-container:first-child .icon-container::after{
 	content: '\f0b2';
 	color: #FFFFFF;
 	width: 17px;
@@ -456,17 +463,13 @@ footer nav ul {
 	font-size: 10px;
 	border-radius: 2px;
 	position: relative;
-    bottom: 7.549rem;
+    bottom: 0.535rem;
     left: 2.35rem;
+	cursor: pointer;
 }
 
-.modal__gallery-img-container button{
-	background-color: transparent;
-	border: none;
-	font-family: 'Work Sans';
-	margin-top: 3px;
-	margin-left: -4px;
-	cursor: pointer;
+.icon-container{
+	position: absolute;
 }
 
 .modal__add-btn{

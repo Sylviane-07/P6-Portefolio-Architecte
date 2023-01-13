@@ -1,15 +1,15 @@
 import * as gallery from "./gallery.js"
 import { addEditElements} from "./edit-layout.js"
 import {renderModal} from "./modal.js"
-import { renderGallery } from "./modal.js"
+import { } from "./modal.js"
 
 
-//CLEAR SESSION STORAGE WHEN CLICK ON LOGOUT
+//CLEAR local STORAGE WHEN CLICK ON LOGOUT
 
 document.addEventListener('DOMContentLoaded', () =>{
     const loginBtn = document.querySelector(".login__nav")
 
-    let getToken = window.sessionStorage.getItem('accessToken')
+    let getToken = window.localStorage.getItem('accessToken')
         if(getToken != null){
             //USER IS LOGGED IN
             loginBtn.textContent = "logout" 
@@ -18,9 +18,10 @@ document.addEventListener('DOMContentLoaded', () =>{
             //ADD EDIT MODE FUNCTION HERE
             addEditElements()
             renderModal()
+            
         }
 
     loginBtn.addEventListener('click', function(){
-        window.sessionStorage.removeItem('accessToken')
+        window.localStorage.removeItem('accessToken')
     })
 })

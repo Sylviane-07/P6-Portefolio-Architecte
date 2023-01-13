@@ -48,10 +48,10 @@ export function renderModal(){
 
 
 //DISPLAY GALLERY IN MODAL
-const modalGallery = document.querySelector(".modal__edit-gallery")
+
 let fetchGallery = []
 
-export async function renderGallery(){
+async function renderGallery(){
     const response = await fetch('http://localhost:5678/api/works')
     if (response.ok){
         const data = await response.json()
@@ -62,6 +62,7 @@ export async function renderGallery(){
     }
 }
 
+console.log(fetchGallery)
 
 function displayGalleryImg(gallery){
     for(let i = 0; i < gallery.length; i++){
@@ -69,12 +70,62 @@ function displayGalleryImg(gallery){
         const imgContainer = document.createElement("div")
         imgContainer.classList.add("modal__gallery-img-container")
         modalGallery.appendChild(imgContainer)
+        const iconContainer = document.createElement("div")
+        iconContainer.classList.add("icon-container")
+        imgContainer.appendChild(iconContainer)
+        const trashIcon = document.createElement("button")
+        trashIcon.classList.add("trash-icon-btn")
+        trashIcon.innerHTML = `<i class="fa-regular fa-trash-can"></i>`
+        iconContainer.appendChild(trashIcon)
         const imgEl = document.createElement("img")
         imgContainer.appendChild(imgEl).setAttribute("crossorigin", "anonymous")
+        const workId = gallery[i].id
+        imgEl.setAttribute("id", `${workId}`)
         imgEl.classList.add("modal__gallery-img")
         imgEl.src = gallery[i].imageUrl
         const editBtn = document.createElement("button")
+        editBtn.classList.add("edit-btn")
         editBtn.innerText = "éditer"
         imgContainer.appendChild(editBtn)
     }
+    //DELETE WORK FROM MODAL
+    deleteWork()
+    
 }
+
+
+
+export function deleteWork(){
+    const trashBtn = document.querySelectorAll(".trash-icon-btn")
+        for (let i = 0; i < trashBtn.length; i += 1){
+            trashBtn[i].addEventListener("click", function(){
+                const galleryTotalImg = document.querySelectorAll(".modal__gallery-img")
+                const imgIndex = galleryTotalImg[i]
+                const id = imgIndex.id
+                console.log(id)
+                
+                async function requestDeleteWork(){
+                    const userToken = JSON.parse(window.localStorage.getItem('accessToken'))
+                    const token = userToken.token
+                    console.log(userToken.token)
+                    const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+                        method: "DELETE",
+                        headers: { "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                        }
+                    })
+                    if (response.ok){
+                        const deleteResponse = await response.json()
+                        console.log(deleteResponse)
+                        
+                    }else{
+                        alert("HTTP-Error: " + response.status);
+                    }
+
+                }
+                requestDeleteWork()
+            })
+        }
+}
+
+

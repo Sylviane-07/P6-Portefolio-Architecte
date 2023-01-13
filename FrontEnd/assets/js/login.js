@@ -7,15 +7,15 @@ const loginBtn = document.querySelector(".login__nav")
 function login(){
     document.addEventListener('DOMContentLoaded', () => {
     loginBtn.addEventListener('click', function(){
-        sessionStorage.removeItem('accessToken')
+        localStorage.removeItem('accessToken')
     })
     authForm.addEventListener('submit', function(evt){
         //prevent form default behavior
         evt.preventDefault()
         //login to receive token
         userAuth()
-        //check token in sessionStorage
-        let getToken = window.sessionStorage.getItem('accessToken')
+        //check token in localStorage
+        let getToken = JSON.parse(window.localStorage.getItem('accessToken'))
         if(getToken != null){
             window.location.href = `./index.html`    
         }
@@ -37,20 +37,21 @@ function userAuth(){
     }
     const userID = JSON.stringify(form)
     let token = ""
-
     async function requestAuth(){
         const response = await fetch('http://localhost:5678/api/users/login',{
             method: 'POST',
             headers: { "Content-Type": "application/json",
-                        'Authorization': `Bearer ${token}`
+                        "Authorization": `Bearer ${token}`
         },
             body: userID
         })
         if(response.status === 200){
             console.log("response ok")
-            let result = response.json
+            let result = await response.json()
             let userToken = JSON.stringify(result)
-            window.sessionStorage.setItem('accessToken', `${userToken}`)
+            console.log(result)
+            console.log(userToken)
+            window.localStorage.setItem('accessToken', `${userToken}`)
             window.location.href = './index.html'
         } else {
             console.log('error')
@@ -60,6 +61,8 @@ function userAuth(){
     }
     requestAuth()
 }
+
+//CREATE ERROR SENTENCE ELEMENT
 const mainEl = document.querySelector("main")
 const error = document.createElement("p")
 error.classList.add("login__error-message")
