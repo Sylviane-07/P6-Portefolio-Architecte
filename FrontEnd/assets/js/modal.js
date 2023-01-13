@@ -122,6 +122,13 @@ export function deleteWork(){
                     if (response.ok){
                         const deleteResponse = await response
                         console.log(deleteResponse.status)
+                        //REMOVE DISPLAY FROM DOM WITHOUT RELOAD
+                        const modalImgCtnr = document.getElementsByClassName("modal__gallery-img-container")
+                        modalImgCtnr[i].remove()
+                        //HOMEPAGE GALLERY WORK UPDATE
+                        const homepageGalleryImg = document.querySelectorAll(".gallery-img-container")
+                        console.log(homepageGalleryImg[i])
+                        homepageGalleryImg[i].remove()
                         
                     }else{
                         alert("HTTP-Error: " + response.status);
@@ -130,13 +137,6 @@ export function deleteWork(){
                 }
                 requestDeleteWork()
 
-                //REMOVE DISPLAY FROM DOM WITHOUT RELOAD
-                const modalImgCtnr = document.getElementsByClassName("modal__gallery-img-container")
-                modalImgCtnr[i].remove()
-                //HOMEPAGE GALLERY WORK UPDATE
-                const homepageGalleryImg = document.querySelectorAll(".gallery-img-container")
-                console.log(homepageGalleryImg[i])
-                homepageGalleryImg[i].remove()
             })
         }
 }
