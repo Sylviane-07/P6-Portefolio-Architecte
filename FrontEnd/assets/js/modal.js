@@ -83,12 +83,13 @@ const modalAddDisplay = `
         <label class="modal-add-form__input-title-label" for="title">Titre</label>
         <input class="modal-add-form__input-title" id="title" type="text" name="title" aria-label="image title input" required>
        
-            <label class="modal-add-form__input-category-label" for="category">Catégorie</label>
-            <select class="modal-add-form__input-category" name="category" id="category" aria-label="select image category" required>
-                <option value=""></option>
-            </select>        
-        
-        <input aria-label="validate add image" id="modal-add-btn" class="modal-add-form__valid-btn-off" type="submit" value="Valider">
+        <label class="modal-add-form__input-category-label" for="category">Catégorie</label>
+        <i class="fa-solid fa-chevron-down"></i>
+        <select class="modal-add-form__input-category" name="category" id="category" aria-label="select image category" required>
+            <option value=""></option>
+        </select>        
+        <div class="modal-add-form__br"></div>
+        <input aria-label="validate add image" id="modal-add-btn" class="modal-add-form__valid-btn" type="submit" value="Valider">
     </form>
 </div>
 </div>
