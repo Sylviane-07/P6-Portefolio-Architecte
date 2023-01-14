@@ -47,7 +47,7 @@ export function renderModal(){
     const modalElBody = document.querySelector(".modal__body")
     const modalAddImgBody = document.querySelector(".modal-add-img__body")
     const modalCloseBtn = document.querySelectorAll(".modal__close-btn")
-
+    
     function toggleModal(){
         modalContainer.classList.toggle("active")
         modalElBody.classList.remove("hidden")
@@ -89,8 +89,8 @@ const modalAddDisplay = `
         <select class="modal-add-form__input-category" name="category" id="category" aria-label="select image category" required>
             <option value=""></option>
         </select>        
-        <div class="modal-add-form__message"></div>
-        <input aria-label="validate add image" id="modal-add-btn" class="modal-add-form__valid-btn" type="submit" value="Valider">
+        <p class="modal-add-form__message"></p>
+        <input aria-label="validate add image" id="modal-add-btn" class="modal-add-form__valid-btn" type="submit" value="Valider" disabled>
     </form>
 </div>
 </div>
@@ -103,6 +103,7 @@ function addImgModal(){
     const modalAddImgBody = document.querySelector(".modal-add-img__body")
     const modalAddImgContainer = document.querySelector(".modal-add-form__file-input-container")
     const displayEl = document.querySelector(".modal-add-form__display-image")
+    const imgInput = document.querySelector(".modal-add-form__file-input")
 
     //DISPLAY MODAL ADD IMAGE PAGE
     addImgBtn.addEventListener("click", function(){
@@ -110,6 +111,7 @@ function addImgModal(){
         modalAddImgBody.classList.remove("hidden")
         modalAddImgContainer.classList.remove("hidden")
         displayEl.classList.add("hidden")
+        imgInput.value = ""
         console.log("click")        
     })
 
@@ -117,8 +119,9 @@ function addImgModal(){
     goBackBtn.addEventListener("click", function(){
         modalElBody.classList.remove("hidden")
         modalAddImgBody.classList.add("hidden")
-        modalAddImgContainer.classList.remove("hidden")
+        modalAddImgContainer.classList.toggle("hidden")
         displayEl.classList.add("hidden")
+        imgInput.value = ""
     })
 
     //ADD CATEGORIES TO SELECT INPUT
@@ -132,7 +135,6 @@ function addImgModal(){
 }
 
 //ADD DISPLAY INPUT IMAGE
-
 function displayUploadedImg(){
     const modalAddImgContainer = document.querySelector(".modal-add-form__file-input-container")
     const imgInput = document.querySelector(".modal-add-form__file-input")
@@ -141,14 +143,14 @@ function displayUploadedImg(){
         console.log(imgInput.value)
         let reader = new FileReader()
         reader.readAsDataURL(imgInput.files[0])
-        displayEl.classList.remove("hidden")
+        displayEl.classList.toggle("hidden")
+        modalAddImgContainer.classList.add("hidden")
         reader.addEventListener("load", ()=>{
-            modalAddImgContainer.classList.add("hidden")
             displayEl.innerHTML = `<img class="modal-add-form__uploaded-img" src="${reader.result}" alt=""/>`
         })
-    })
-    
+    }) 
 }
+
 
 //GET CATEGORIES
 let fetchCategories = []
