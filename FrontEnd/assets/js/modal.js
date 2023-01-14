@@ -37,7 +37,7 @@ export function addModal() {
 
 
 //DISPLAY & CLOSE MODAL
-
+//RENDER MODAL
 export function renderModal(){
     addModal()
     renderGallery()
@@ -80,6 +80,7 @@ const modalAddDisplay = `
             <input class="modal-add-form__file-input" type="file" id="image" name="image" accept=".jpg, .png" aria-label="select image to upload">
             <p>jpg, png : 4Mo max</p>
         </div>
+        <div class="modal-add-form__display-image"></div>
         <label class="modal-add-form__input-title-label" for="title">Titre</label>
         <input class="modal-add-form__input-title" id="title" type="text" name="title" aria-label="image title input" required>
        
@@ -88,7 +89,7 @@ const modalAddDisplay = `
         <select class="modal-add-form__input-category" name="category" id="category" aria-label="select image category" required>
             <option value=""></option>
         </select>        
-        <div class="modal-add-form__br"></div>
+        <div class="modal-add-form__message"></div>
         <input aria-label="validate add image" id="modal-add-btn" class="modal-add-form__valid-btn" type="submit" value="Valider">
     </form>
 </div>
@@ -100,17 +101,57 @@ function addImgModal(){
     const addImgBtn = document.getElementById("modal-add-btn")
     const goBackBtn = document.querySelector(".modal-add-img__go-back-icon")
     const modalAddImgBody = document.querySelector(".modal-add-img__body")
+
+    //DISPLAY MODAL ADD IMAGE PAGE
     addImgBtn.addEventListener("click", function(){
         modalElBody.classList.toggle("hidden")
         modalAddImgBody.classList.remove("hidden")
-        console.log("click")
-    
+        console.log("click")        
     })
+
+    //GO BACK TO MODAL GALLERY
     goBackBtn.addEventListener("click", function(){
         modalElBody.classList.remove("hidden")
         modalAddImgBody.classList.add("hidden")
     })
+
+    //ADD CATEGORIES TO SELECT INPUT
+    getCategories()
+    //DISPLAY INPUT IMAGE
+    console.log(fetchGallery)
+    console.log(fetchCategories)
+
+    
 }
+
+//ADD DISPLAY INPUT IMAGE
+
+
+
+//GET CATEGORIES
+let fetchCategories = []
+
+async function getCategories(){
+    const response = await fetch('http://localhost:5678/api/categories')
+    if (response.ok){
+        const data = await response.json()
+        fetchCategories.push(...data)
+        for(let i = 0; i < fetchCategories.length; i++){
+            const categoryId = fetchCategories[i].id
+            const categoryName = fetchCategories[i].name
+            const selectInput = document.querySelector(".modal-add-form__input-category")
+            const createOption = document.createElement("option")
+            createOption.setAttribute("value", `${categoryId}`)
+            createOption.setAttribute("id", `category-id-${categoryId}`)
+            createOption.innerHTML = `&nbsp;&nbsp;&nbsp;${categoryName}`
+            selectInput.append(createOption)
+        }
+    }else{
+        alert("HTTP-Error: " + response.status);
+    }
+}
+
+
 
 
 //DISPLAY GALLERY IN MODAL
@@ -128,7 +169,7 @@ async function renderGallery(){
     }
 }
 
-console.log(fetchGallery)
+
 
 function displayGalleryImg(gallery){
     for(let i = 0; i < gallery.length; i++){
@@ -157,7 +198,6 @@ function displayGalleryImg(gallery){
     }
     //DELETE WORK FROM MODAL
     deleteWork()
-    
 }
 
 
@@ -174,7 +214,7 @@ export function deleteWork(){
                 //GET ID FOR API ROUTE
                 const id = modalImgIndex.id
                 console.log(id)
-                
+                //DELETE REQUEST TO API
                 async function requestDeleteWork(){
                     const userToken = JSON.parse(window.localStorage.getItem('accessToken'))
                     const token = userToken.token
@@ -206,5 +246,3 @@ export function deleteWork(){
             })
         }
 }
-
-
