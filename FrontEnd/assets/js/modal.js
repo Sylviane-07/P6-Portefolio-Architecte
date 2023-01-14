@@ -77,8 +77,8 @@ const modalAddDisplay = `
         <div class="modal-add-form__file-input-container">
             <i class="fa-regular fa-image"></i>
             <label for="image">+ Ajouter photo</label>
-            <input class="modal-add-form__file-input type="file" id="image" name="image" accept=".jpg, .png" aria-label="select image to upload">
-            <span>jpg, png : 4Mo max</span>
+            <input class="modal-add-form__file-input" type="file" id="image" name="image" accept=".jpg, .png" aria-label="select image to upload">
+            <p>jpg, png : 4Mo max</p>
         </div>
         <label for="title">Titre</label>
         <input class="modal-add-form__input-title" id="title" type="text" name="title" aria-label="image title input" required>
