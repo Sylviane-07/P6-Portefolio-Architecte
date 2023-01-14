@@ -533,13 +533,16 @@ footer nav ul {
 	margin-bottom: 10px;
 }
 
+.modal-add-form__display-image.hidden{
+	display: none;
+}
+
 .modal-add-form__file-input-container.hidden {
 	display: none;
 }
 
-.modal-add-form__display-image{
-	background-position: center;
-	background-size: cover;
+.modal-add-form__display-image img{
+	max-height: 169px;
 }
 
 .modal-add-img__form {

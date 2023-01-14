@@ -101,11 +101,15 @@ function addImgModal(){
     const addImgBtn = document.getElementById("modal-add-btn")
     const goBackBtn = document.querySelector(".modal-add-img__go-back-icon")
     const modalAddImgBody = document.querySelector(".modal-add-img__body")
+    const modalAddImgContainer = document.querySelector(".modal-add-form__file-input-container")
+    const displayEl = document.querySelector(".modal-add-form__display-image")
 
     //DISPLAY MODAL ADD IMAGE PAGE
     addImgBtn.addEventListener("click", function(){
         modalElBody.classList.toggle("hidden")
         modalAddImgBody.classList.remove("hidden")
+        modalAddImgContainer.classList.remove("hidden")
+        displayEl.classList.add("hidden")
         console.log("click")        
     })
 
@@ -113,11 +117,14 @@ function addImgModal(){
     goBackBtn.addEventListener("click", function(){
         modalElBody.classList.remove("hidden")
         modalAddImgBody.classList.add("hidden")
+        modalAddImgContainer.classList.remove("hidden")
+        displayEl.classList.add("hidden")
     })
 
     //ADD CATEGORIES TO SELECT INPUT
     getCategories()
     //DISPLAY INPUT IMAGE
+    displayUploadedImg()
     console.log(fetchGallery)
     console.log(fetchCategories)
 
@@ -126,7 +133,22 @@ function addImgModal(){
 
 //ADD DISPLAY INPUT IMAGE
 
-
+function displayUploadedImg(){
+    const modalAddImgContainer = document.querySelector(".modal-add-form__file-input-container")
+    const imgInput = document.querySelector(".modal-add-form__file-input")
+    const displayEl = document.querySelector(".modal-add-form__display-image")
+    imgInput.addEventListener("change", function(){
+        console.log(imgInput.value)
+        let reader = new FileReader()
+        reader.readAsDataURL(imgInput.files[0])
+        displayEl.classList.remove("hidden")
+        reader.addEventListener("load", ()=>{
+            modalAddImgContainer.classList.add("hidden")
+            displayEl.innerHTML = `<img class="modal-add-form__uploaded-img" src="${reader.result}" alt=""/>`
+        })
+    })
+    
+}
 
 //GET CATEGORIES
 let fetchCategories = []
