@@ -112,6 +112,7 @@ function addImgModal(){
         modalAddImgContainer.classList.remove("hidden")
         displayEl.classList.add("hidden")
         imgInput.value = ""
+        displayEl.innerHTML = ""
         console.log("click")        
     })
 
@@ -122,6 +123,7 @@ function addImgModal(){
         modalAddImgContainer.classList.toggle("hidden")
         displayEl.classList.add("hidden")
         imgInput.value = ""
+        displayEl.innerHTML = ""
     })
 
     //ADD CATEGORIES TO SELECT INPUT
