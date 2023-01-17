@@ -8,7 +8,7 @@ async function requestWork(){
         fetchedWork.push(...data)
         renderImg(fetchedWork)
     }else{
-        alert("HTTP-Error: " + response.status);
+        alert("HTTP-Error: " + response.status)
     }
 }
 requestWork()

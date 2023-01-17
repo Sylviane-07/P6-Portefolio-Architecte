@@ -21,7 +21,6 @@ function login(){
         }
     })
 })
-
 }
 
 login()
@@ -52,7 +51,7 @@ function userAuth(){
             let userToken = JSON.stringify(result)
             console.log(result)
             console.log(userToken)
-            window.localStorage.setItem('accessToken', `${userToken}`)
+            window.localStorage.setItem("accessToken", `${userToken}`)
             window.location.href = './index.html'
         } else {
             console.log('error')

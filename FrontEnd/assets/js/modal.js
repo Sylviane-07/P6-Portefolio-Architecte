@@ -2,16 +2,16 @@ import {renderImg} from "./gallery.js"
 
 //CREATE MODAL WINDOW
 const modalEditdisplay = `
-<div class="modal__body">
-    <h2 id="modalTitle" class="modal__title">Galerie photo</h2>
-    <div aria-label="edit gallery" class="modal__edit-gallery"></div>
-    <div class="modal__input-container">
-        <input aria-label="add picture" id="modal-add-btn" class="modal__add-btn" type="submit" value="Ajouter une photo">
-        <input aria-label="delete picture" id="modal-delete-btn" class="modal__delete-btn" type="submit" value="Supprimer la galerie">
+    <div class="modal__body">
+        <h2 id="modalTitle" class="modal__title">Galerie photo</h2>
+        <div aria-label="edit gallery" class="modal__edit-gallery"></div>
+        <div class="modal__input-container">
+            <input aria-label="add picture" id="modal-add-btn" class="modal__add-btn" type="submit" value="Ajouter une photo">
+            <input aria-label="delete picture" id="modal-delete-btn" class="modal__delete-btn" type="submit" value="Supprimer la galerie">
+        </div>
     </div>
-</div>
-
 `
+
 export function addModal() {
     const modalContainer = document.createElement("div")
     modalContainer.classList.add("modal__container")
@@ -68,37 +68,37 @@ export function renderModal(){
 //MODAL ADD IMAGE
 
 const modalAddDisplay = `
-<div class="modal-add-img__body">
-<span class="modal-add-img__icon-container">
-    <button class="modal-add-img__go-back-icon" aria-label="go-back button"><i class="fa-solid fa-arrow-left-long""></i></button>
-    <button class="modal__close-btn modal-add-img__close-icon" aria-label="close modal"><i class="fa-solid fa-xmark"></i></button>
-</span>
-<h2 id="modal-add-img__title" class="modal__title modal-add-img__title">Ajout photo</h2>
-<div class="modal-add-img__form-container">
-    <form action="" method="post" class="modal-add-img__form">
-        <div class="modal-add-form__file-input-container">
-            <i class="fa-regular fa-image"></i>
-            <label class="modal-add-form__file-input-label" for="image">+ Ajouter photo</label>
-            <input class="modal-add-form__file-input" type="file" id="image" name="image" accept=".jpg, .png" aria-label="select image to upload">
-            <p>jpg, png : 4Mo max</p>
-        </div>
-        <div class="modal-add-form__display-image"></div>
-        <p class="modal-add-form__message"></p>
-        <label class="modal-add-form__input-title-label" for="title">Titre</label>
-        <input class="modal-add-form__input-title" id="title" type="text" name="title" aria-label="image title input" required>
-       
-        <label class="modal-add-form__input-category-label" for="category">Catégorie</label>
-        <i class="fa-solid fa-chevron-down"></i>
-        <select class="modal-add-form__input-category" name="category" id="category" aria-label="select image category" required>
-            <option value=""></option>
-        </select>        
-        <span class="modal-add-form__br">
-            <p class="modal-add-form__upload-message"></p>
-        </span>
-        <input aria-label="validate add image" id="modal-add-btn" class="modal-add-form__valid-btn" type="submit" value="Valider" disabled>
-    </form>
-</div>
-</div>
+    <div class="modal-add-img__body">
+    <span class="modal-add-img__icon-container">
+        <button class="modal-add-img__go-back-icon" aria-label="go-back button"><i class="fa-solid fa-arrow-left-long""></i></button>
+        <button class="modal__close-btn modal-add-img__close-icon" aria-label="close modal"><i class="fa-solid fa-xmark"></i></button>
+    </span>
+    <h2 id="modal-add-img__title" class="modal__title modal-add-img__title">Ajout photo</h2>
+    <div class="modal-add-img__form-container">
+        <form action="" method="post" class="modal-add-img__form">
+            <div class="modal-add-form__file-input-container">
+                <i class="fa-regular fa-image"></i>
+                <label class="modal-add-form__file-input-label" for="image">+ Ajouter photo</label>
+                <input class="modal-add-form__file-input" type="file" id="image" name="image" accept=".jpg, .png" aria-label="select image to upload">
+                <p>jpg, png : 4Mo max</p>
+            </div>
+            <div class="modal-add-form__display-image"></div>
+            <p class="modal-add-form__message"></p>
+            <label class="modal-add-form__input-title-label" for="title">Titre</label>
+            <input class="modal-add-form__input-title" id="title" type="text" name="title" aria-label="image title input" required>
+        
+            <label class="modal-add-form__input-category-label" for="category">Catégorie</label>
+            <i class="fa-solid fa-chevron-down"></i>
+            <select class="modal-add-form__input-category" name="category" id="category" aria-label="select image category" required>
+                <option value=""></option>
+            </select>        
+            <span class="modal-add-form__br">
+                <p class="modal-add-form__upload-message"></p>
+            </span>
+            <input aria-label="validate add image" id="modal-add-btn" class="modal-add-form__valid-btn" type="submit" value="Valider" disabled>
+        </form>
+    </div>
+    </div>
 `
 
 function addImgModal(){
@@ -121,8 +121,7 @@ function addImgModal(){
         imgInput.value = ""
         displayEl.innerHTML = ""
         displayMessageEl.innerHTML = ""
-        sucessMessage.innerHTML = ""
-        console.log("click")        
+        sucessMessage.innerHTML = ""     
     })
 
     //GO BACK TO MODAL GALLERY
@@ -139,10 +138,8 @@ function addImgModal(){
     getCategories()
     //DISPLAY INPUT IMAGE
     displayUploadedImg()
-    console.log(fetchGallery)
-    console.log(fetchCategories)
 
-
+    //UPLOAD IMAGE & UPDATE GALLERIES
     const uploadForm = document.querySelector(".modal-add-img__form")
     const image = document.getElementById("image")
     uploadForm.addEventListener("submit", function(evt){
@@ -174,6 +171,7 @@ function displayUploadedImg(){
         reader.readAsDataURL(imgInput.files[0])
         displayEl.classList.toggle("hidden")
         modalAddImgContainer.classList.add("hidden")
+        
         reader.addEventListener("load", ()=>{
             displayEl.innerHTML = `<img class="modal-add-form__uploaded-img" src="${reader.result}" alt=""/>`
         })
@@ -195,7 +193,7 @@ function displayUploadedImg(){
 let fetchCategories = []
 
 async function getCategories(){
-    const response = await fetch('http://localhost:5678/api/categories')
+    const response = await fetch("http://localhost:5678/api/categories")
     if (response.ok){
         const data = await response.json()
         fetchCategories.push(...data)
@@ -216,13 +214,11 @@ async function getCategories(){
 
 
 
-
 //DISPLAY GALLERY IN MODAL
 
 let fetchGallery = []
-
 async function renderGallery(){
-    const response = await fetch('http://localhost:5678/api/works')
+    const response = await fetch("http://localhost:5678/api/works")
     if (response.ok){
         const data = await response.json()
         fetchGallery.push(...data)
@@ -231,7 +227,7 @@ async function renderGallery(){
         homepageGalleryImg.innerHTML = ""
         renderImg(fetchGallery)
     }else{
-        alert("HTTP-Error: " + response.status);
+        alert("HTTP-Error: " + response.status)
     }
 }
 
