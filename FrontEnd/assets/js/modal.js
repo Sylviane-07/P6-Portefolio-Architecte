@@ -1,3 +1,5 @@
+import {renderImg} from "./gallery.js"
+
 //CREATE MODAL WINDOW
 const modalEditdisplay = `
 <div class="modal__body">
@@ -225,6 +227,9 @@ async function renderGallery(){
         const data = await response.json()
         fetchGallery.push(...data)
         displayGalleryImg(fetchGallery)
+        const homepageGalleryImg = document.querySelector("#portfolio .gallery")
+        homepageGalleryImg.innerHTML = ""
+        renderImg(fetchGallery)
     }else{
         alert("HTTP-Error: " + response.status);
     }
@@ -336,6 +341,7 @@ async function uploadWork(){
         const result = await response.json()
         console.log(result)
         sucessMessage.innerHTML = "Photo ajoutée"
+        updateWork()
     }else{
         alert("HTTP-Error: " + response.status)
     }
@@ -347,5 +353,6 @@ function updateWork(){
     const modalGallery = document.querySelector(".modal__edit-gallery")
     fetchGallery = []
     modalGallery.innerHTML = ""
+    //HOMEPAGE GALLERY WORK UPDATE
     renderGallery()
 }

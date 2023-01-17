@@ -17,7 +17,7 @@ requestWork()
 const portfolioSection = document.getElementById("portfolio")
 const gallery = document.querySelector("#portfolio .gallery")
 
-function renderImg(work){
+export function renderImg(work){
     for(let i = 0; i < work.length; i++){
         const figureEl = document.createElement("figure")
         figureEl.classList.add("gallery-img-container")
