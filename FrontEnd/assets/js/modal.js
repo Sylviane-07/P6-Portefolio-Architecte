@@ -90,7 +90,9 @@ const modalAddDisplay = `
         <select class="modal-add-form__input-category" name="category" id="category" aria-label="select image category" required>
             <option value=""></option>
         </select>        
-        <span class="modal-add-form__br"></span>
+        <span class="modal-add-form__br">
+            <p class="modal-add-form__upload-message"></p>
+        </span>
         <input aria-label="validate add image" id="modal-add-btn" class="modal-add-form__valid-btn" type="submit" value="Valider" disabled>
     </form>
 </div>
@@ -105,6 +107,7 @@ function addImgModal(){
     const modalAddImgContainer = document.querySelector(".modal-add-form__file-input-container")
     const displayEl = document.querySelector(".modal-add-form__display-image")
     const imgInput = document.querySelector(".modal-add-form__file-input")
+    const sucessMessage = document.querySelector(".modal-add-form__upload-message")
     const displayMessageEl = document.querySelector(".modal-add-form__message")
 
     //DISPLAY MODAL ADD IMAGE PAGE
@@ -116,6 +119,7 @@ function addImgModal(){
         imgInput.value = ""
         displayEl.innerHTML = ""
         displayMessageEl.innerHTML = ""
+        sucessMessage.innerHTML = ""
         console.log("click")        
     })
 
@@ -136,7 +140,21 @@ function addImgModal(){
     console.log(fetchGallery)
     console.log(fetchCategories)
 
+
+    const uploadForm = document.querySelector(".modal-add-img__form")
+    const image = document.getElementById("image")
+    uploadForm.addEventListener("submit", function(evt){
+        evt.preventDefault()
+        uploadWork()
+        uploadForm.reset()
+        image.value = ""
+        displayEl.classList.add("hidden")
+        modalAddImgContainer.classList.toggle("hidden")
+    })
     
+    imgInput.addEventListener("click", function(){
+        sucessMessage.innerHTML = ""
+    })
 }
 
 //ADD DISPLAY INPUT IMAGE
@@ -146,7 +164,7 @@ function displayUploadedImg(){
     const displayEl = document.querySelector(".modal-add-form__display-image")
     const displayMessageEl = document.querySelector(".modal-add-form__message")
     const addImgSubmitBtn = document.querySelector(".modal-add-form__valid-btn")
-    const uploadForm = document.querySelector(".modal-add-img__form")
+   
     
     imgInput.addEventListener("change", function(){
         console.log(imgInput.value)
@@ -165,10 +183,6 @@ function displayUploadedImg(){
                 addImgSubmitBtn.disabled = true
             }else{
                 addImgSubmitBtn.disabled = false
-                uploadForm.addEventListener("submit", function(evt){
-                    evt.preventDefault()
-                    uploadWork()
-                })
             }
         }
     }) 
@@ -301,6 +315,7 @@ async function uploadWork(){
     const image = document.getElementById("image")
     const title = document.getElementById("title").value
     const category = document.getElementById("category").value
+    const sucessMessage = document.querySelector(".modal-add-form__upload-message")
 
     const formData = new FormData()
     formData.append("image", image.files[0])
@@ -320,7 +335,17 @@ async function uploadWork(){
     if(response.ok){
         const result = await response.json()
         console.log(result)
+        sucessMessage.innerHTML = "Photo ajoutée"
     }else{
         alert("HTTP-Error: " + response.status)
     }
+}
+
+//UPDATE & DISPLAY UPLOADED WORK
+
+function updateWork(){
+    const modalGallery = document.querySelector(".modal__edit-gallery")
+    fetchGallery = []
+    modalGallery.innerHTML = ""
+    renderGallery()
 }

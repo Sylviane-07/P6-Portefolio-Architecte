@@ -619,7 +619,7 @@ footer nav ul {
 
 .modal-add-form__br{
 	margin-top: 40px;
-	border-bottom: 1px solid #B3B3B3;
+	border-top: 1px solid #B3B3B3;
 }
 
 .modal-add-form__valid-btn{
@@ -635,4 +635,12 @@ footer nav ul {
 	color: #FF0000;
 	font-weight: 600;
 	text-align: center;
+}
+
+.modal-add-form__upload-message{
+	text-align: center;
+	margin-top: 20px;
+	color: #008000;
+	font-weight: 600;
+	font-size: 15px;
 }
