@@ -297,6 +297,7 @@ export function deleteWork(){
                         const homepageGalleryImg = document.querySelectorAll(".gallery-img-container")
                         console.log(homepageGalleryImg[i])
                         homepageGalleryImg[i].remove()
+                        updateWork()
                         
                     }else{
                         alert("HTTP-Error: " + response.status)
