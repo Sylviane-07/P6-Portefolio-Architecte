@@ -617,7 +617,7 @@ footer nav ul {
 	pointer-events:none;
 }
 
-.modal-add-form__message{
+.modal-add-form__br{
 	margin-top: 40px;
 	border-bottom: 1px solid #B3B3B3;
 }
@@ -629,4 +629,10 @@ footer nav ul {
     height: 36px;
 	border: none;
 	cursor: pointer;
+}
+
+.modal-add-form__message{
+	color: #FF0000;
+	font-weight: 600;
+	text-align: center;
 }

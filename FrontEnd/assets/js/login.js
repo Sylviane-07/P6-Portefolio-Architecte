@@ -5,17 +5,17 @@ const loginBtn = document.querySelector(".login__nav")
 
 // CHECK FOR TOKEN TO LOGIN USER
 function login(){
-    document.addEventListener('DOMContentLoaded', () => {
-    loginBtn.addEventListener('click', function(){
-        localStorage.removeItem('accessToken')
+    document.addEventListener("DOMContentLoaded", () => {
+    loginBtn.addEventListener("click", function(){
+        localStorage.removeItem("accessToken")
     })
-    authForm.addEventListener('submit', function(evt){
+    authForm.addEventListener("submit", function(evt){
         //prevent form default behavior
         evt.preventDefault()
         //login to receive token
         userAuth()
         //check token in localStorage
-        let getToken = JSON.parse(window.localStorage.getItem('accessToken'))
+        let getToken = JSON.parse(window.localStorage.getItem("accessToken"))
         if(getToken != null){
             window.location.href = `./index.html`    
         }
@@ -38,11 +38,12 @@ function userAuth(){
     const userID = JSON.stringify(form)
     let token = ""
     async function requestAuth(){
-        const response = await fetch('http://localhost:5678/api/users/login',{
-            method: 'POST',
-            headers: { "Content-Type": "application/json",
-                        "Authorization": `Bearer ${token}`
-        },
+        const response = await fetch("http://localhost:5678/api/users/login",{
+            method: "POST",
+            headers: { 
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
             body: userID
         })
         if(response.status === 200){

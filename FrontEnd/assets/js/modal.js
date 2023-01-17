@@ -81,6 +81,7 @@ const modalAddDisplay = `
             <p>jpg, png : 4Mo max</p>
         </div>
         <div class="modal-add-form__display-image"></div>
+        <p class="modal-add-form__message"></p>
         <label class="modal-add-form__input-title-label" for="title">Titre</label>
         <input class="modal-add-form__input-title" id="title" type="text" name="title" aria-label="image title input" required>
        
@@ -89,7 +90,7 @@ const modalAddDisplay = `
         <select class="modal-add-form__input-category" name="category" id="category" aria-label="select image category" required>
             <option value=""></option>
         </select>        
-        <p class="modal-add-form__message"></p>
+        <span class="modal-add-form__br"></span>
         <input aria-label="validate add image" id="modal-add-btn" class="modal-add-form__valid-btn" type="submit" value="Valider" disabled>
     </form>
 </div>
@@ -104,6 +105,7 @@ function addImgModal(){
     const modalAddImgContainer = document.querySelector(".modal-add-form__file-input-container")
     const displayEl = document.querySelector(".modal-add-form__display-image")
     const imgInput = document.querySelector(".modal-add-form__file-input")
+    const displayMessageEl = document.querySelector(".modal-add-form__message")
 
     //DISPLAY MODAL ADD IMAGE PAGE
     addImgBtn.addEventListener("click", function(){
@@ -113,6 +115,7 @@ function addImgModal(){
         displayEl.classList.add("hidden")
         imgInput.value = ""
         displayEl.innerHTML = ""
+        displayMessageEl.innerHTML = ""
         console.log("click")        
     })
 
@@ -141,6 +144,10 @@ function displayUploadedImg(){
     const modalAddImgContainer = document.querySelector(".modal-add-form__file-input-container")
     const imgInput = document.querySelector(".modal-add-form__file-input")
     const displayEl = document.querySelector(".modal-add-form__display-image")
+    const displayMessageEl = document.querySelector(".modal-add-form__message")
+    const addImgSubmitBtn = document.querySelector(".modal-add-form__valid-btn")
+    const uploadForm = document.querySelector(".modal-add-img__form")
+    
     imgInput.addEventListener("change", function(){
         console.log(imgInput.value)
         let reader = new FileReader()
@@ -150,6 +157,20 @@ function displayUploadedImg(){
         reader.addEventListener("load", ()=>{
             displayEl.innerHTML = `<img class="modal-add-form__uploaded-img" src="${reader.result}" alt=""/>`
         })
+        if (imgInput.files.length > 0){
+            const fileSize = imgInput.files.item(0).size
+            const fileMb = fileSize / 1024 ** 2
+            if(fileMb >= 4){
+                displayMessageEl.innerHTML = "Veuillez choisir un fichier de moins de 4Mb"
+                addImgSubmitBtn.disabled = true
+            }else{
+                addImgSubmitBtn.disabled = false
+                uploadForm.addEventListener("submit", function(evt){
+                    evt.preventDefault()
+                    uploadWork()
+                })
+            }
+        }
     }) 
 }
 
@@ -263,7 +284,7 @@ export function deleteWork(){
                         homepageGalleryImg[i].remove()
                         
                     }else{
-                        alert("HTTP-Error: " + response.status);
+                        alert("HTTP-Error: " + response.status)
                     }
 
                 }
@@ -271,4 +292,35 @@ export function deleteWork(){
 
             })
         }
+}
+
+
+//UPLOAD WORK
+
+async function uploadWork(){
+    const image = document.getElementById("image")
+    const title = document.getElementById("title").value
+    const category = document.getElementById("category").value
+
+    const formData = new FormData()
+    formData.append("image", image.files[0])
+    formData.append("title", title)
+    formData.append("category", category)
+
+    const userToken = JSON.parse(window.localStorage.getItem('accessToken'))
+    const token = userToken.token
+    console.log(userToken.token)
+    const response = await fetch("http://localhost:5678/api/works", {
+        method: "POST",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        },
+        body: formData
+    })
+    if(response.ok){
+        const result = await response.json()
+        console.log(result)
+    }else{
+        alert("HTTP-Error: " + response.status)
+    }
 }
