@@ -71,12 +71,8 @@ filterBtnContainer.appendChild(selectHotelRestaurant)
 //Render filter 
 selectAll.addEventListener("click", function(){
     console.log("click All")
-    const filterAll = fetchedWork.filter(function(fetchedWork){
-        return fetchedWork.userId === 1
-    })
-    console.log(filterAll)
     gallery.innerHTML = " "
-    renderImg(filterAll)
+    renderImg(fetchedWork)
 })
 
 selectObject.addEventListener("click", function(){
