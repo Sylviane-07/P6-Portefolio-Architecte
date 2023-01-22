@@ -6,6 +6,7 @@ const loginBtn = document.querySelector(".login__nav")
 // CHECK FOR TOKEN TO LOGIN USER
 function login(){
     document.addEventListener("DOMContentLoaded", () => {
+        window.localStorage.removeItem("accessToken")
     loginBtn.addEventListener("click", function(){
         localStorage.removeItem("accessToken")
     })
