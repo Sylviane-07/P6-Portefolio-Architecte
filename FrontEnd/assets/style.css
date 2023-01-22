@@ -602,6 +602,10 @@ footer nav ul {
 	text-indent: 15px;
 }
 
+.modal-add-form__input-title, .modal-add-form__input-category:focus{
+	outline: 0;
+}
+
 .modal-add-form__input-category{
 	-moz-appearance: none;
     -webkit-appearance: none;
@@ -631,6 +635,10 @@ footer nav ul {
 	cursor: pointer;
 }
 
+.modal-add-form__valid-btn.form-valid{
+	background: #1D6154;
+}
+
 .modal-add-form__message{
 	color: #FF0000;
 	font-weight: 600;
@@ -640,7 +648,6 @@ footer nav ul {
 .modal-add-form__upload-message{
 	text-align: center;
 	margin-top: 20px;
-	color: #008000;
 	font-weight: 600;
 	font-size: 15px;
 }

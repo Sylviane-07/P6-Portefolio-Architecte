@@ -79,23 +79,23 @@ const modalAddDisplay = `
             <div class="modal-add-form__file-input-container">
                 <i class="fa-regular fa-image"></i>
                 <label class="modal-add-form__file-input-label" for="image">+ Ajouter photo</label>
-                <input class="modal-add-form__file-input" type="file" id="image" name="image" accept=".jpg, .png" aria-label="select image to upload">
+                <input class="modal-add-img-input modal-add-form__file-input" type="file" id="image" name="image" accept=".jpg, .png" aria-label="select image to upload" required>
                 <p>jpg, png : 4Mo max</p>
             </div>
             <div class="modal-add-form__display-image"></div>
             <p class="modal-add-form__message"></p>
             <label class="modal-add-form__input-title-label" for="title">Titre</label>
-            <input class="modal-add-form__input-title" id="title" type="text" name="title" aria-label="image title input" required>
+            <input class="modal-add-img-input modal-add-form__input-title" id="title" type="text" name="title" aria-label="image title input" required>
         
             <label class="modal-add-form__input-category-label" for="category">Catégorie</label>
             <i class="fa-solid fa-chevron-down"></i>
-            <select class="modal-add-form__input-category" name="category" id="category" aria-label="select image category" required>
+            <select class="modal-add-img-input modal-add-form__input-category" name="category" id="category" aria-label="select image category" required>
                 <option value=""></option>
             </select>        
             <span class="modal-add-form__br">
                 <p class="modal-add-form__upload-message"></p>
             </span>
-            <input aria-label="validate add image" id="modal-add-btn" class="modal-add-form__valid-btn" type="submit" value="Valider" disabled>
+            <input aria-label="validate add image" id="modal-add-btn" class="modal-add-img-input modal-add-form__valid-btn" type="submit" value="Valider">
         </form>
     </div>
     </div>
@@ -111,6 +111,8 @@ function addImgModal(){
     const imgInput = document.querySelector(".modal-add-form__file-input")
     const sucessMessage = document.querySelector(".modal-add-form__upload-message")
     const displayMessageEl = document.querySelector(".modal-add-form__message")
+    const uploadForm = document.querySelector(".modal-add-img__form")
+    const addImgSubmitBtn = document.querySelector(".modal-add-form__valid-btn")
 
     //DISPLAY MODAL ADD IMAGE PAGE
     addImgBtn.addEventListener("click", function(){
@@ -121,7 +123,9 @@ function addImgModal(){
         imgInput.value = ""
         displayEl.innerHTML = ""
         displayMessageEl.innerHTML = ""
-        sucessMessage.innerHTML = ""     
+        sucessMessage.innerHTML = "" 
+        uploadForm.reset()
+        addImgSubmitBtn.classList.remove("form-valid")
     })
 
     //GO BACK TO MODAL GALLERY
@@ -132,6 +136,7 @@ function addImgModal(){
         displayEl.classList.add("hidden")
         imgInput.value = ""
         displayEl.innerHTML = ""
+        uploadForm.reset()
     })
 
     //ADD CATEGORIES TO SELECT INPUT
@@ -139,8 +144,12 @@ function addImgModal(){
     //DISPLAY INPUT IMAGE
     displayUploadedImg()
 
+    //CHECK FORM INPUTS & ACTIVATE SUBMIT BUTTON
+    uploadForm.addEventListener("input", function(){
+        validateInputs()
+    })
+    
     //UPLOAD IMAGE & UPDATE GALLERIES
-    const uploadForm = document.querySelector(".modal-add-img__form")
     const image = document.getElementById("image")
     uploadForm.addEventListener("submit", function(evt){
         evt.preventDefault()
@@ -154,6 +163,7 @@ function addImgModal(){
     imgInput.addEventListener("click", function(){
         sucessMessage.innerHTML = ""
     })
+    
 }
 
 //ADD DISPLAY INPUT IMAGE
@@ -162,11 +172,8 @@ function displayUploadedImg(){
     const imgInput = document.querySelector(".modal-add-form__file-input")
     const displayEl = document.querySelector(".modal-add-form__display-image")
     const displayMessageEl = document.querySelector(".modal-add-form__message")
-    const addImgSubmitBtn = document.querySelector(".modal-add-form__valid-btn")
    
-    
     imgInput.addEventListener("change", function(){
-        console.log(imgInput.value)
         let reader = new FileReader()
         reader.readAsDataURL(imgInput.files[0])
         displayEl.classList.toggle("hidden")
@@ -180,13 +187,29 @@ function displayUploadedImg(){
             const fileMb = fileSize / 1024 ** 2
             if(fileMb >= 4){
                 displayMessageEl.innerHTML = "Veuillez choisir un fichier de moins de 4Mb"
-                addImgSubmitBtn.disabled = true
-            }else{
-                addImgSubmitBtn.disabled = false
             }
         }
     }) 
 }
+
+//VALIDATE FORM INPUTS VALUE
+function validateInputs(){
+    const image = document.getElementById("image")
+    const title = document.getElementById("title")
+    const category = document.getElementById("category")
+
+    const imageValue = image.value.trim()
+    const titleValue = title.value.trim()
+    const categoryValue = category.value.trim()
+        
+    if((titleValue !== "") && (imageValue !== null) && (categoryValue !== null)){
+        displayMessageEl.innerText = ""
+        addImgSubmitBtn.classList.add("form-valid")
+    }else{
+        addImgSubmitBtn.classList.remove("form-valid")
+    }
+}
+
 
 
 //GET CATEGORIES
@@ -208,7 +231,7 @@ async function getCategories(){
             selectInput.append(createOption)
         }
     }else{
-        alert("HTTP-Error: " + response.status);
+        console.log(response.status)
     }
 }
 
@@ -227,7 +250,7 @@ async function renderGallery(){
         homepageGalleryImg.innerHTML = ""
         renderImg(fetchGallery)
     }else{
-        alert("HTTP-Error: " + response.status)
+        console.log(response.status)
     }
 }
 
@@ -263,8 +286,8 @@ function displayGalleryImg(gallery){
 }
 
 
-
-export function deleteWork(){
+//DELETE WORK()
+function deleteWork(){
     const trashBtn = document.querySelectorAll(".trash-icon-btn")
         for (let i = 0; i < trashBtn.length; i += 1){
             trashBtn[i].addEventListener("click", function(e){
@@ -300,7 +323,7 @@ export function deleteWork(){
                         updateWork()
                         
                     }else{
-                        alert("HTTP-Error: " + response.status)
+                        console.log(response.status)
                     }
 
                 }
@@ -311,8 +334,8 @@ export function deleteWork(){
 }
 
 
-//UPLOAD WORK
 
+//UPLOAD WORK()
 async function uploadWork(){
     const image = document.getElementById("image")
     const title = document.getElementById("title").value
@@ -337,15 +360,18 @@ async function uploadWork(){
     if(response.ok){
         const result = await response.json()
         console.log(result)
+        sucessMessage.style.color = "#008000"
         sucessMessage.innerHTML = "Photo ajoutée"
         updateWork()
     }else{
-        alert("HTTP-Error: " + response.status)
+        sucessMessage.style.color = "#FF0000"
+        sucessMessage.innerText = "une erreur est survenue"
     }
 }
 
-//UPDATE & DISPLAY UPLOADED WORK
 
+
+//UPDATE & DISPLAY UPLOADED WORK()
 function updateWork(){
     const modalGallery = document.querySelector(".modal__edit-gallery")
     fetchGallery = []
