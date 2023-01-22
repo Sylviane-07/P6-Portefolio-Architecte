@@ -8,7 +8,7 @@ async function requestWork(){
         fetchedWork.push(...data)
         renderImg(fetchedWork)
     }else{
-        alert("HTTP-Error: " + response.status)
+        console.log(response.status)
     }
 }
 requestWork()
@@ -70,37 +70,30 @@ filterBtnContainer.appendChild(selectHotelRestaurant)
 //Add filter
 //Render filter 
 selectAll.addEventListener("click", function(){
-    console.log("click All")
     gallery.innerHTML = " "
     renderImg(fetchedWork)
 })
 
 selectObject.addEventListener("click", function(){
-    console.log("click Objets")
     const filterObjects = fetchedWork.filter(function(fetchedWork){
         return fetchedWork.categoryId === 1
     })
-    console.log(filterObjects)
     gallery.innerHTML = " "
     renderImg(filterObjects)
 })
 
 selectAppartment.addEventListener("click", function(){
-    console.log("click Appartements")
     const filterAppartments = fetchedWork.filter(function(fetchedWork){
         return fetchedWork.categoryId === 2
     })
-    console.log(filterAppartments)
     gallery.innerHTML = " "
     renderImg(filterAppartments)
 })
 
 selectHotelRestaurant.addEventListener("click", function(){
-    console.log("click Hotel")
     const filterHotelRestaurant = fetchedWork.filter(function(fetchedWork){
         return fetchedWork.categoryId === 3
     })
-    console.log(filterHotelRestaurant)
     gallery.innerHTML = " "
     renderImg(filterHotelRestaurant)
 })

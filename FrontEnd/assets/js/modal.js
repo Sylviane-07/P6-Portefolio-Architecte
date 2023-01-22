@@ -61,6 +61,7 @@ export function renderModal(){
     function closeModal(){
         modalContainer.classList.remove("active")
     }
+
     modalCloseBtn.forEach(trigger => trigger.addEventListener("click", closeModal))
 }
 
@@ -145,6 +146,24 @@ function addImgModal(){
     displayUploadedImg()
 
     //CHECK FORM INPUTS & ACTIVATE SUBMIT BUTTON
+    //VALIDATE FORM INPUTS VALUE
+    function validateInputs(){
+        const image = document.getElementById("image")
+        const title = document.getElementById("title")
+        const category = document.getElementById("category")
+
+        const imageValue = image.value.trim()
+        const titleValue = title.value.trim()
+        const categoryValue = category.value.trim()
+        
+        if((titleValue !== "") && (imageValue !== null) && (categoryValue !== null)){
+            displayMessageEl.innerText = ""
+            addImgSubmitBtn.classList.add("form-valid")
+        }else{
+            addImgSubmitBtn.classList.remove("form-valid")
+        }
+    }
+
     uploadForm.addEventListener("input", function(){
         validateInputs()
     })
@@ -191,25 +210,6 @@ function displayUploadedImg(){
         }
     }) 
 }
-
-//VALIDATE FORM INPUTS VALUE
-function validateInputs(){
-    const image = document.getElementById("image")
-    const title = document.getElementById("title")
-    const category = document.getElementById("category")
-
-    const imageValue = image.value.trim()
-    const titleValue = title.value.trim()
-    const categoryValue = category.value.trim()
-        
-    if((titleValue !== "") && (imageValue !== null) && (categoryValue !== null)){
-        displayMessageEl.innerText = ""
-        addImgSubmitBtn.classList.add("form-valid")
-    }else{
-        addImgSubmitBtn.classList.remove("form-valid")
-    }
-}
-
 
 
 //GET CATEGORIES
@@ -349,7 +349,6 @@ async function uploadWork(){
 
     const userToken = JSON.parse(window.localStorage.getItem('accessToken'))
     const token = userToken.token
-    console.log(userToken.token)
     const response = await fetch("http://localhost:5678/api/works", {
         method: "POST",
         headers: {
@@ -359,11 +358,11 @@ async function uploadWork(){
     })
     if(response.ok){
         const result = await response.json()
-        console.log(result)
         sucessMessage.style.color = "#008000"
         sucessMessage.innerHTML = "Photo ajoutée"
         updateWork()
     }else{
+        console.log(result.status)
         sucessMessage.style.color = "#FF0000"
         sucessMessage.innerText = "une erreur est survenue"
     }

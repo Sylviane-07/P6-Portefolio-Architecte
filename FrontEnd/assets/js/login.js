@@ -55,8 +55,7 @@ function userAuth(){
             window.localStorage.setItem("accessToken", `${userToken}`)
             window.location.href = './index.html'
         } else {
-            console.log('error')
-           // alert("HTTP-Error: " + response.status)
+            console.log(response.status)
             errorMessage()
         }
     }
