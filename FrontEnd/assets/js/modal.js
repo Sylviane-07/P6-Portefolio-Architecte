@@ -201,13 +201,6 @@ function displayUploadedImg(){
         reader.addEventListener("load", ()=>{
             displayEl.innerHTML = `<img class="modal-add-form__uploaded-img" src="${reader.result}" alt=""/>`
         })
-        if (imgInput.files.length > 0){
-            const fileSize = imgInput.files.item(0).size
-            const fileMb = fileSize / 1024 ** 2
-            if(fileMb >= 4){
-                displayMessageEl.innerHTML = "Veuillez choisir un fichier de moins de 4Mb"
-            }
-        }
     }) 
 }
 
@@ -255,7 +248,7 @@ async function renderGallery(){
 }
 
 
-
+//DISPLAY GALLERY IN MODAL
 function displayGalleryImg(gallery){
     for(let i = 0; i < gallery.length; i++){
         const modalGallery = document.querySelector(".modal__edit-gallery")
