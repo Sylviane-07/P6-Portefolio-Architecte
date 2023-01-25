@@ -287,16 +287,13 @@ function deleteWork(){
                 e.preventDefault()
                 const modalGalleryTotalImg = document.querySelectorAll(".modal__gallery-img")
                 const modalImgIndex = modalGalleryTotalImg[i]
-                console.log(modalGalleryTotalImg[i])
 
                 //GET ID FOR API ROUTE
                 const id = modalImgIndex.id
-                console.log(id)
                 //DELETE REQUEST TO API
                 async function requestDeleteWork(){
                     const userToken = JSON.parse(window.localStorage.getItem('accessToken'))
                     const token = userToken.token
-                    console.log(userToken.token)
                     const response = await fetch(`http://localhost:5678/api/works/${id}`, {
                         method: "DELETE",
                         headers: { "Content-Type": "application/json",
@@ -305,13 +302,11 @@ function deleteWork(){
                     })
                     if (response.ok){
                         const deleteResponse = await response
-                        console.log(deleteResponse.status)
                         //REMOVE DISPLAY FROM DOM WITHOUT RELOAD
                         const modalImgCtnr = document.getElementsByClassName("modal__gallery-img-container")
                         modalImgCtnr[i].remove()
                         //HOMEPAGE GALLERY WORK UPDATE
                         const homepageGalleryImg = document.querySelectorAll(".gallery-img-container")
-                        console.log(homepageGalleryImg[i])
                         homepageGalleryImg[i].remove()
                         updateWork()
                         
@@ -355,7 +350,6 @@ async function uploadWork(){
         sucessMessage.innerHTML = "Photo ajoutée"
         updateWork()
     }else{
-        console.log(result.status)
         sucessMessage.style.color = "#FF0000"
         sucessMessage.innerText = "une erreur est survenue"
     }
