@@ -1,8 +1,11 @@
+import { URL } from "./API-URL.js"
+
+
 //Fetch work from API
 let fetchedWork = []
 
 async function requestWork(){
-    const response = await fetch('http://localhost:5678/api/works')
+    const response = await fetch(`${URL}works`)
     if (response.ok){
         const data = await response.json()
         fetchedWork.push(...data)
