@@ -1,3 +1,5 @@
+import { URL } from "./API-URL.js"
+
 const submitBtn = document.getElementById("submit-btn")
 const authForm = document.querySelector(".login__form")
 const loginBtn = document.querySelector(".login__nav")
@@ -38,7 +40,7 @@ function userAuth(){
     const userID = JSON.stringify(form)
     let token = ""
     async function requestAuth(){
-        const response = await fetch("http://localhost:5678/api/users/login",{
+        const response = await fetch(`${URL}users/login`,{
             method: "POST",
             headers: { 
                 "Content-Type": "application/json",

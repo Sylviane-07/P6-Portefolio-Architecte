@@ -1,3 +1,4 @@
+import { URL } from "./API-URL.js"
 import {renderImg} from "./gallery.js"
 
 //CREATE MODAL WINDOW
@@ -209,7 +210,7 @@ function displayUploadedImg(){
 let fetchCategories = []
 
 async function getCategories(){
-    const response = await fetch("http://localhost:5678/api/categories")
+    const response = await fetch(`${URL}categories`)
     if (response.ok){
         const data = await response.json()
         fetchCategories.push(...data)
@@ -234,7 +235,7 @@ async function getCategories(){
 
 let fetchGallery = []
 async function renderGallery(){
-    const response = await fetch("http://localhost:5678/api/works")
+    const response = await fetch(`${URL}works`)
     if (response.ok){
         const data = await response.json()
         fetchGallery.push(...data)
@@ -294,7 +295,7 @@ function deleteWork(){
                 async function requestDeleteWork(){
                     const userToken = JSON.parse(window.localStorage.getItem('accessToken'))
                     const token = userToken.token
-                    const response = await fetch(`http://localhost:5678/api/works/${id}`, {
+                    const response = await fetch(`${URL}works/${id}`, {
                         method: "DELETE",
                         headers: { "Content-Type": "application/json",
                         "Authorization": `Bearer ${token}`
@@ -337,7 +338,7 @@ async function uploadWork(){
 
     const userToken = JSON.parse(window.localStorage.getItem('accessToken'))
     const token = userToken.token
-    const response = await fetch("http://localhost:5678/api/works", {
+    const response = await fetch(`${URL}works`, {
         method: "POST",
         headers: {
             "Authorization": `Bearer ${token}`
